@@ -1,4 +1,4 @@
-/* 1. CONFIGURACIÓN GLOBAL Y MÓVIL */
+/* 1. CONFIGURACIÓN GLOBAL */
 body {
     background: radial-gradient(circle, #1b2735 0%, #090a0f 100%);
     height: 100vh;
@@ -9,60 +9,10 @@ body {
     overflow: hidden;
     font-family: 'Georgia', serif;
     perspective: 1500px;
-    /* Crucial para móviles: evita zooms accidentales */
     touch-action: manipulation; 
 }
 
-/* Ajustes para celulares */
-@media (max-width: 600px) {
-    .book {
-        width: 300px; /* Tamaño del libro más pequeño para móvil */
-        height: 400px;
-    }
-
-    .page {
-        width: 150px; /* Cada página a la mitad del libro */
-        height: 400px;
-    }
-
-    body {
-        overflow-x: hidden; /* Evita que la pantalla se mueva a los lados */
-    }
-
-    h1 {
-        font-size: 1.2rem; /* Letra un poco más pequeña para que quepa el texto */
-    }
-
-    p {
-        font-size: 0.9rem;
-        line-height: 1.4;
-    }
-}
-/* Solución definitiva para ajuste de pantalla móvil */
-@media (max-width: 600px) {
-    body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        overflow: hidden; /* Evita que se mueva la pantalla */
-        margin: 0;
-    }
-
-    .book {
-        /* Encoge el libro al 60% de su tamaño original para que quepa */
-        transform: scale(0.6); 
-        transform-origin: center;
-        margin: 0 auto;
-    }
-
-    .page {
-        /* Ajuste de texto para que no se vea minúsculo */
-        font-size: 14px !important; 
-        padding: 15px !important;
-    }
-}
-/* Efecto Nieve */
+/* 2. EFECTO NIEVE */
 #snow-container {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -77,12 +27,13 @@ body {
 }
 @keyframes fall { to { transform: translateY(105vh); } }
 
-/* Estructura del Libro */
+/* 3. ESTRUCTURA DEL LIBRO (Base para PC) */
 .book {
     width: 320px;
     height: 450px;
     position: relative;
     z-index: 10;
+    transition: transform 0.5s;
 }
 
 .page {
@@ -106,20 +57,19 @@ body {
     align-items: center;
     padding: 15px;
     box-sizing: border-box;
-    border-radius: 20px; /* Esquinas redondeadas */
+    border-radius: 20px;
     box-shadow: inset 3px 0px 20px rgba(0,0,0,0.15);
 }
 
 .front { background: white; z-index: 2; }
 .back { background: #fdfdfd; transform: rotateY(180deg); }
 
-/* Morado para Portada y Contraportada */
 .cover {
     background: #f5c2d4 !important; 
     color: #3a2f33 !important;
 }
 
-/* Marco Dorado Doble */
+/* 4. CONTENIDO Y TEXTO */
 .border-gold {
     width: 100%;
     height: 100%;
@@ -134,104 +84,42 @@ body {
     box-sizing: border-box;
 }
 
-.gif-portada {
-    width: 150px; /* Ajusta el tamaño según prefieras */
-    height: auto;
-    margin: 10px 0; /* Da espacio arriba y abajo del GIF */
-    border-radius: 10px; /* Bordes suaves para que combine con el libro */
-}
-
-.gif-Contraportada {
-    width: 200px; /* Ajusta el tamaño según prefieras */
-    height: auto;
-    margin: 10px 0; /* Da espacio arriba y abajo del GIF */
-    border-radius: 10px; /* Bordes suaves para que combine con el libro */
-}
-
-/* Ajustes para el contenedor de texto */
-.border-gold {
-    width: 100%;
-    height: 100%;
-    border: 4px double #ffd700;
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Centra todo el bloque verticalmente */
-    align-items: center;     /* Centra todo el bloque horizontalmente */
-    padding: 25px;           /* Más espacio interno para que se vea como la imagen */
-    box-sizing: border-box;
-}
-
-/* Títulos: Siempre centrados y destacados */
-.title {
-    font-size: 1.4rem;
-    font-weight: bold;
-    margin-bottom: 15px;
-    text-align: center;
-    color: inherit;
-}
-
-/* GIF: Centrado y con tamaño controlado */
-.gif-container {
-    width: 80%;
-    max-width: 140px;
-    margin-bottom: 15px;
-}
-.gif-container img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-}
-
-//* El Mensaje: Justificado y SIN palabras cortadas */
 .text-content {
     font-size: 0.95rem;
-    line-height: 1.6;         /* Un poco más de espacio para elegancia */
-    text-align: justify;      /* Ajustado a los lados */
-    
-    /* CAMBIOS AQUÍ: Evitar cortes de palabras */
+    line-height: 1.6;
+    text-align: justify;
     hyphens: none !important;
     word-break: normal;
     overflow-wrap: normal;
-    
     margin-bottom: 15px;
     width: 100%;
 }
 
-/* AJUSTE PARA MÓVILES */
-@media (max-width: 400px) {
+.gif-portada, .gif-Contraportada, .gif-container img {
+    width: 150px;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* 5. SOLUCIÓN DEFINITIVA PARA MÓVILES (Ajuste automático) */
+@media (max-width: 600px) {
     .book {
-        width: 280px;  /* Un poco más angosto para celus pequeños */
-        height: 400px; /* Un poco más corto */
+        /* Esto encoge todo el libro para que quepa en la pantalla sin romperse */
+        transform: scale(0.75); 
     }
-
-    .title {
-        font-size: 1.1rem; /* Letra un poco más pequeña */
-    }
-
+    
     .text-content {
-        font-size: 0.85rem; /* Ajuste del texto para que no desborde */
+        font-size: 0.85rem; /* Letra un poco más pequeña en móvil */
         line-height: 1.4;
     }
 
-    .gif-portada, .gif-container {
-        max-width: 120px; /* GIFs más pequeños en móvil */
+    .border-gold {
+        padding: 15px;
     }
 }
 
-/* Instrucción final: Centrada */
-.instruction {
-    font-size: 0.85rem;
-    text-align: center;
-    font-style: italic;
-    margin-top: auto;         /* Lo empuja hacia abajo del marco */
-}
-
-/* Z-index para 3 hojas */
+/* 6. CONTROL DE HOJAS */
 #p1 { z-index: 3; }
 #p2 { z-index: 2; }
 #p3 { z-index: 1; }
-
-
 .flipped { transform: rotateY(-180deg); }
-
