@@ -38,7 +38,30 @@ body {
         line-height: 1.4;
     }
 }
+/* Solución definitiva para ajuste de pantalla móvil */
+@media (max-width: 600px) {
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden; /* Evita que se mueva la pantalla */
+        margin: 0;
+    }
 
+    .book {
+        /* Encoge el libro al 60% de su tamaño original para que quepa */
+        transform: scale(0.6); 
+        transform-origin: center;
+        margin: 0 auto;
+    }
+
+    .page {
+        /* Ajuste de texto para que no se vea minúsculo */
+        font-size: 14px !important; 
+        padding: 15px !important;
+    }
+}
 /* Efecto Nieve */
 #snow-container {
     position: fixed;
@@ -211,3 +234,4 @@ body {
 
 
 .flipped { transform: rotateY(-180deg); }
+
