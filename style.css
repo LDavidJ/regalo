@@ -13,6 +13,32 @@ body {
     touch-action: manipulation; 
 }
 
+/* Ajustes para celulares */
+@media (max-width: 600px) {
+    .book {
+        width: 300px; /* Tamaño del libro más pequeño para móvil */
+        height: 400px;
+    }
+
+    .page {
+        width: 150px; /* Cada página a la mitad del libro */
+        height: 400px;
+    }
+
+    body {
+        overflow-x: hidden; /* Evita que la pantalla se mueva a los lados */
+    }
+
+    h1 {
+        font-size: 1.2rem; /* Letra un poco más pequeña para que quepa el texto */
+    }
+
+    p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+}
+
 /* Efecto Nieve */
 #snow-container {
     position: fixed;
@@ -182,5 +208,6 @@ body {
 #p1 { z-index: 3; }
 #p2 { z-index: 2; }
 #p3 { z-index: 1; }
+
 
 .flipped { transform: rotateY(-180deg); }
